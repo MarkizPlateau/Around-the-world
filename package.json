@@ -1,0 +1,21 @@
+{
+  "name": "around_the_world",
+  "version": "1.0.0",
+  "description": "Event Menagement System PWA",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "install-all": "npm install --workspaces",
+    "start-backend": "npm run develop --workspace backend",
+    "start-frontend": "npm run dev --workspace frontend",
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marek Adamczyk",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
