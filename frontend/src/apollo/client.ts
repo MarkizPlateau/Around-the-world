@@ -1,15 +1,14 @@
 import { HttpLink } from '@apollo/client';
-import {
-  registerApolloClient,
-  ApolloClient,
-  InMemoryCache,
-} from '@apollo/experimental-nextjs-app-support';
+import { ApolloClient, InMemoryCache } from '@apollo/experimental-nextjs-app-support';
 
-export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
+export function makeClient() {
+  const httpLink = new HttpLink({
+    uri: process.env.NEXT_PUBLIC_BACKEND_URL,
+    fetchOptions: { cache: 'no-store' },
+  });
+
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_BACKEND_URL,
-    }),
+    link: httpLink,
   });
-});
+}
