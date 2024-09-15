@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "around_the_world",
   "version": "1.0.0",
   "description": "Event Menagement System PWA",
@@ -11,7 +12,9 @@
     "start-backend": "npm run develop --workspace backend",
     "start-frontend": "npm run dev --workspace frontend",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format-lint-build": "npm run format-lint-build --workspace frontend",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "npm run gen-frontend"
   },
   "author": "Marek Adamczyk",
   "license": "ISC",
