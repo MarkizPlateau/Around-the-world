@@ -1,1 +1,2 @@
-export * from './ApolloWrapper';
+export * from './ApolloWrapper/ApolloWrapper';
+export * from './LayoutWrapper/LayoutWrapper';
