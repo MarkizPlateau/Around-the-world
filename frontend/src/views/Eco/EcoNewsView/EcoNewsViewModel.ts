@@ -1,16 +1,16 @@
 import { Model } from '@/model/mvvm';
 import { extendObservable, makeObservable, observable } from 'mobx';
-import { EcoViewApiData } from './EcoViewModelBuilder';
+import { EcoNewsViewApiData } from './EcoNewsViewModelBuilder';
 
-export class EcoViewModel extends Model {
-  data: EcoViewApiData;
+export class EcoNewsViewModel extends Model {
+  data: EcoNewsViewApiData;
   // IDEA
   // Less code approach, we do not type everything separately in the class and use extendObservable
   // but TS may not catch some errors, it is good to use Getter/Setter etc.
-  // set dummy(value: EcoViewApiData["dummy"]) {
+  // set dummy(value: EcoNewsViewApiData["dummy"]) {
   //   this.data.dummy = value;
   // }
-  constructor(apiData: EcoViewApiData) {
+  constructor(apiData: EcoNewsViewApiData) {
     super();
     this.data = apiData;
     extendObservable(this, {
