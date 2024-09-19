@@ -1,13 +1,8 @@
 'use client';
 
-import { ApolloWrapper } from '@/wrappers/ApolloWrapper';
-import { ApolloNextAppProvider } from '@apollo/experimental-nextjs-app-support';
 import { PropsWithChildren } from 'react';
-ApolloNextAppProvider;
+import { ApolloWrapper } from '@/wrappers/ApolloWrapper/ApolloWrapper';
+
 export function Providers({ children }: PropsWithChildren) {
-  return (
-    <>
-      <ApolloWrapper>{children}</ApolloWrapper>
-    </>
-  );
+  return <ApolloWrapper>{children}</ApolloWrapper>;
 }

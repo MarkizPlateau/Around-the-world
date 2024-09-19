@@ -1,14 +1,18 @@
 const generateRoutes = (category: string) => ({
-  ROOT: `/${category}`,
-  SIGN_IN: `/${category}/sign-in}`,
-  REGISTER: `/${category}/register}`,
-  FORGOT_PASSWORD: `/${category}/forgot-password`,
-  RESET_PASSWORD: `/${category}/reset-password`,
+  NEWS: `/${category}/news`,
+  LIST: `/${category}/list`,
+  MAP: `/${category}/map`,
   DETAILS: (id: number) => `${category}/id-${id}`,
 });
 
 export const ROUTES = {
   HOME: '/',
+  SIGN_IN: '/sign-in',
+  REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+  ABOUT_US: '/about-us',
+  CONTACT: '/contact',
   ECO: generateRoutes('eco'),
-  EVENTS: generateRoutes('events'),
+  FESTIVAL: generateRoutes('festival'),
 };
