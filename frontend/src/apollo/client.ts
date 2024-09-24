@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/experimental-nextjs-app-sup
 
 export function makeClient() {
   const httpLink = new HttpLink({
-    uri: process.env.NEXT_PUBLIC_BACKEND_URL,
+    uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
     fetchOptions: { cache: 'no-store' },
   });
 
