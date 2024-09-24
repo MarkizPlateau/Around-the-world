@@ -1,4 +1,6 @@
 ## Dependency Management
+npm install
+npm run gen
 
 **IDEA:** To maintain a single `package-lock.json` file and avoid potential conflicts:
 - Install all dependencies from the main project directory:
