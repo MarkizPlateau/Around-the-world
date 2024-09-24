@@ -1,7 +1,6 @@
 /* eslint-disable */
 import * as types from './graphql';
-
-
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 /**
  * Map of all GraphQL operations in the project.
@@ -14,15 +13,35 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "mutation Login($email: String!, $password: String!) {\n  login(input: {identifier: $email, password: $password}) {\n    jwt\n    user {\n      id\n      confirmed\n    }\n  }\n}": types.LoginDocument,
     "mutation Register($input: UsersPermissionsRegisterInput!) {\n  register(input: $input) {\n    jwt\n    user {\n      id\n    }\n  }\n}": types.RegisterDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ *
+ *
+ * @example
+ * ```ts
+ * const query = graphql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * ```
+ *
+ * The query argument is unknown!
+ * Please regenerate the types.
  */
-export function graphql(source: "mutation Register($input: UsersPermissionsRegisterInput!) {\n  register(input: $input) {\n    jwt\n    user {\n      id\n    }\n  }\n}"): typeof import('./graphql').RegisterDocument;
+export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Login($email: String!, $password: String!) {\n  login(input: {identifier: $email, password: $password}) {\n    jwt\n    user {\n      id\n      confirmed\n    }\n  }\n}"): (typeof documents)["mutation Login($email: String!, $password: String!) {\n  login(input: {identifier: $email, password: $password}) {\n    jwt\n    user {\n      id\n      confirmed\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Register($input: UsersPermissionsRegisterInput!) {\n  register(input: $input) {\n    jwt\n    user {\n      id\n    }\n  }\n}"): (typeof documents)["mutation Register($input: UsersPermissionsRegisterInput!) {\n  register(input: $input) {\n    jwt\n    user {\n      id\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
+
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
