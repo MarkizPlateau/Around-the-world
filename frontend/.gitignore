@@ -43,3 +43,4 @@ next-env.d.ts
 src/graphql/generates/fragment-masking.ts
 src/graphql/generates/gql.ts
 src/graphql/generates/graphql.ts
+/schema.graphql
