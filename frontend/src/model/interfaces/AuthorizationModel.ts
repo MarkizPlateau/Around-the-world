@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable, runInAction } from 'mobx'
 import { Command, Model } from '../mvvm';
 import { signIn, SignInResponse } from 'next-auth/react';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/helpers';
-import { forgotPassword, registerUser, resetPassword } from '@/app/calls/auth';
+import { forgotPassword, registerUser, resetPassword } from '@/calls/auth';
 
 export class AuthorizationModel extends Model {
   username: string = '';
@@ -25,9 +25,9 @@ export class AuthorizationModel extends Model {
   successfulLogin: boolean = false;
   successfulSendForm: boolean = false;
 
-  constructor({ resetPasswordCode }: { resetPasswordCode?: string }) {
+  constructor({ resetPasswordCode }: { resetPasswordCode?: string } = {}) {
     super();
-    this.resetPasswordCode = resetPasswordCode;
+    this.resetPasswordCode = resetPasswordCode ?? '';
     makeObservable(this, {
       username: observable,
       email: observable,
