@@ -2,7 +2,7 @@ import { Awaitable, DefaultSession, DefaultUser, NextAuthOptions } from 'next-au
 
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { loginUser } from '@/app/calls/auth';
+import { loginUser } from '@/calls/auth';
 import { JWT } from 'next-auth/jwt';
 
 export interface CustomJWTUser extends DefaultUser {
