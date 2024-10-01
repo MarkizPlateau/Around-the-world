@@ -14,7 +14,9 @@ export default function LayoutWrapper({ children }: PropsWithChildren) {
       {path === ROUTES.HOME ? (
         <>{children}</>
       ) : (
-        <main className="relative mx-auto max-w-screen-2xl px-5 2xl:px-2">{children}</main>
+        // TODO
+        // px-5
+        <main className="relative mx-auto max-w-screen-2xl 2xl:px-2">{children}</main>
       )}
     </>
   );
