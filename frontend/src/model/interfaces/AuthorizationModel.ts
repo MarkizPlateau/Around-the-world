@@ -5,7 +5,6 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/helpers';
 import { forgotPassword, registerUser, resetPassword } from '@/calls/auth';
 
 export class AuthorizationModel extends Model {
-  username: string = '';
   email: string = '';
   password: string = '';
   passwordConfirmation: string = '';
@@ -19,7 +18,6 @@ export class AuthorizationModel extends Model {
   resetPassword: Command<void, any>;
 
   serverErrors: string = '';
-  isLoading: boolean = false;
   showErrors: boolean = true;
 
   successfulLogin: boolean = false;
@@ -29,15 +27,14 @@ export class AuthorizationModel extends Model {
     super();
     this.resetPasswordCode = resetPasswordCode ?? '';
     makeObservable(this, {
-      username: observable,
       email: observable,
       password: observable,
       passwordConfirmation: observable,
       newPassword: observable,
 
       serverErrors: observable,
-      isLoading: observable,
       showErrors: observable,
+      successfulSendForm: observable,
 
       trimEmail: computed,
       isEmailCorrect: computed,
@@ -46,7 +43,6 @@ export class AuthorizationModel extends Model {
 
       setServerErrors: action.bound,
       setDefault: action.bound,
-      setLoading: action.bound,
     });
     this.login = new Command(
       async () => {
@@ -62,7 +58,7 @@ export class AuthorizationModel extends Model {
           this.setIsLoading(false);
         } else {
           runInAction(() => {
-            this.isLoading = false;
+            this.isApiDataLoading = false;
             this.successfulLogin = true;
           });
         }
@@ -74,14 +70,15 @@ export class AuthorizationModel extends Model {
       async () => {
         this.setDefault();
         this.setIsLoading(true);
-        registerUser({ username: this.username, email: this.email, password: this.password })
-          .then(() => {
+        registerUser({ username: this.email, email: this.email, password: this.password })
+          .then((data) => {
             runInAction(() => {
               this.successfulSendForm = true;
             });
+            console.log(this.successfulSendForm);
           })
           .catch((e) => {
-            this.setServerErrors('');
+            this.setServerErrors(e.message);
           })
           .finally(() => {
             this.setIsLoading(false);
@@ -105,7 +102,7 @@ export class AuthorizationModel extends Model {
             this.setServerErrors(e.message);
           })
           .finally(() => {
-            this.isLoading = false;
+            this.isApiDataLoading = false;
             console.log('Attempt to send password reset code completed');
           });
       },
@@ -163,10 +160,6 @@ export class AuthorizationModel extends Model {
 
   setServerErrors(error: string) {
     this.serverErrors = error;
-  }
-
-  setLoading(bool: boolean) {
-    this.isLoading = bool;
   }
 
   setDefault() {

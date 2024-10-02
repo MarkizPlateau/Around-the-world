@@ -23,7 +23,7 @@ type RegisterViewType = {
 const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterViewType) => {
   return (
     <FormWrapper>
-      <Heading as="h1" fontSize="3xl" mb="6" color="main.500" textAlign="center">
+      <Heading as="h1" fontSize="3xl" mb="6" color="purple" textAlign="center">
         Utwórz konto
       </Heading>
       <VStack gap="4" mb="6">
@@ -68,25 +68,24 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
 
             <Text>
               Aby aktywować swoje konto, wystarczy potwierdzić rejestrację, korzystając z
-              wiadomości, którą wysłaliśmy na Twój adres e-mail. Sprawdź swoją skrzynkę i ciesz się
-              pełnym dostępem do naszej platformy!
+              wiadomości, którą wysłaliśmy na Twój adres e-mail.
             </Text>
           </Box>
         </Alert>
       )}
-
       <FormButton
-        colorScheme="yellow"
+        colorScheme="pink"
+        borderRadius="xl"
         color="white"
         command={model.register}
         text="Zarejestruj się"
-        isLoading={model.isLoading}
+        isLoading={model.isApiDataLoading}
         my="10"
       />
       <HStack justifyContent="center">
         <Text>Masz już konto?</Text>
         <LinkNext route="/login">
-          <Text width="min-content" as="span" color="main.500" fontWeight="600">
+          <Text width="min-content" as="span" color="pink" fontWeight="600">
             Zaloguj się
           </Text>
         </LinkNext>
