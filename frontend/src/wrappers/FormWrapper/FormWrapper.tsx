@@ -1,6 +1,6 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, BoxProps, Flex } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
-export interface FormWrapperProps {
+export interface FormWrapperProps extends BoxProps {
   children: React.ReactNode;
 }
 
@@ -10,7 +10,7 @@ export const FormWrapper = observer(({ children, ...props }: FormWrapperProps) =
       bg="white"
       borderRadius={{ base: '0', sm: '2xl' }}
       boxShadow="login"
-      mt={{ base: '0', sm: '12' }}
+      mt={{ base: '0', sm: '40' }}
       mx="auto"
       maxWidth={{ base: '100vw', md: '600px' }}
       py="10"
