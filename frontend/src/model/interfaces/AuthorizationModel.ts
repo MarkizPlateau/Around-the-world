@@ -5,6 +5,7 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/helpers';
 import { forgotPassword, registerUser, resetPassword } from '@/calls/auth';
 
 export class AuthorizationModel extends Model {
+  username: string = '';
   email: string = '';
   password: string = '';
   passwordConfirmation: string = '';
@@ -27,6 +28,7 @@ export class AuthorizationModel extends Model {
     super();
     this.resetPasswordCode = resetPasswordCode ?? '';
     makeObservable(this, {
+      username: observable,
       email: observable,
       password: observable,
       passwordConfirmation: observable,
@@ -36,6 +38,7 @@ export class AuthorizationModel extends Model {
       showErrors: observable,
       successfulSendForm: observable,
 
+      isUsername: computed,
       trimEmail: computed,
       isEmailCorrect: computed,
       isPasswordCorrect: computed,
@@ -70,7 +73,7 @@ export class AuthorizationModel extends Model {
       async () => {
         this.setDefault();
         this.setIsLoading(true);
-        registerUser({ username: this.email, email: this.email, password: this.password })
+        registerUser({ username: this.username, email: this.email, password: this.password })
           .then((data) => {
             runInAction(() => {
               this.successfulSendForm = true;
@@ -85,7 +88,11 @@ export class AuthorizationModel extends Model {
             console.log('Registration attempt completed');
           });
       },
-      () => this.isPasswordCorrect && this.isConfirmPasswordCorrect && this.isEmailCorrect,
+      () =>
+        this.isUsername &&
+        this.isPasswordCorrect &&
+        this.isConfirmPasswordCorrect &&
+        this.isEmailCorrect,
     );
 
     this.sendResetPasswordCode = new Command(
@@ -138,6 +145,9 @@ export class AuthorizationModel extends Model {
       },
       () => this.isPasswordCorrect && this.isConfirmPasswordCorrect,
     );
+  }
+  get isUsername() {
+    return !!this.username;
   }
 
   get trimEmail() {

@@ -28,6 +28,13 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
       </Heading>
       <VStack gap="4" mb="6">
         <CustomFormControl
+          labelTitle="Nazwa użytkownika"
+          isInvalid={model.showErrors && !model.isUsername}
+          errorMessage="Podaj nazwę użytkownika"
+        >
+          <CustomInput {...bindProperty(model, 'username')} placeholder="Nazwa użytkownika" />
+        </CustomFormControl>
+        <CustomFormControl
           labelTitle="E-mail"
           isInvalid={model.showErrors && !model.isEmailCorrect}
           errorMessage="Nieprawidłowy adres e-mail"
