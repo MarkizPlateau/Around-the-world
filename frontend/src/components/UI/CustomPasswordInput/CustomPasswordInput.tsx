@@ -33,8 +33,8 @@ export const CustomPasswordInput: FC<CustomPasswordInputProps> = ({
       ></CustomInput>
       <InputRightElement h="full" zIndex="0">
         <Button
-          rounded="2xl"
           variant="ghost"
+          padding="1"
           _hover={{}}
           onClick={() => setShowPassword((showPassword) => !showPassword)}
         >
