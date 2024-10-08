@@ -52,13 +52,14 @@ export class AuthorizationModel extends Model {
         this.setDefault();
         this.setIsLoading(true);
 
-        const response = (await signIn('credentials', {
-          username: this.email,
+        const response = await signIn('credentials', {
+          username: this.email || this.username,
           password: this.password,
-        })) as unknown as SignInResponse;
+          redirect: false,
+        });
         if (response?.error) {
           this.setServerErrors(response.error);
-          this.setIsLoading(false);
+          this.isApiDataLoading = false;
         } else {
           runInAction(() => {
             this.isApiDataLoading = false;
@@ -66,7 +67,8 @@ export class AuthorizationModel extends Model {
           });
         }
       },
-      () => this.isEmailCorrect && this.password.length > 0,
+
+      () => (this.isEmailCorrect || this.isUsername) && this.isPasswordCorrect,
     );
 
     this.register = new Command(
@@ -74,11 +76,10 @@ export class AuthorizationModel extends Model {
         this.setDefault();
         this.setIsLoading(true);
         registerUser({ username: this.username, email: this.email, password: this.password })
-          .then((data) => {
+          .then(() => {
             runInAction(() => {
               this.successfulSendForm = true;
             });
-            console.log(this.successfulSendForm);
           })
           .catch((e) => {
             this.setServerErrors(e.message);
@@ -100,7 +101,7 @@ export class AuthorizationModel extends Model {
         this.setDefault();
         this.setIsLoading(true);
         forgotPassword({ email: this.trimEmail })
-          .then((e) => {
+          .then(() => {
             runInAction(() => {
               this.successfulSendForm = true;
             });
@@ -109,7 +110,7 @@ export class AuthorizationModel extends Model {
             this.setServerErrors(e.message);
           })
           .finally(() => {
-            this.isApiDataLoading = false;
+            this.setIsLoading(false);
             console.log('Attempt to send password reset code completed');
           });
       },

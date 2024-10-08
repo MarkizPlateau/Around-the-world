@@ -1,7 +1,5 @@
-import { Awaitable, DefaultSession, DefaultUser, NextAuthOptions } from 'next-auth';
-
+import { Awaitable, DefaultSession, DefaultUser, NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-
 import { loginUser } from '@/calls/auth';
 import { JWT } from 'next-auth/jwt';
 
@@ -27,16 +25,19 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Email', type: 'text', placeholder: 'Adres email' },
+        username: {
+          label: 'Email lub nazwa użytkownika',
+          type: 'text',
+          placeholder: 'Adres email lub nazwa użytkownika',
+        },
         password: { label: 'Hasło', type: 'password' },
       },
       authorize: async (credentials) => {
         const data = await loginUser(credentials);
-        if (data) {
-          return { user: data.login } as unknown as Awaitable<CustomJWTUser>;
-        } else {
-          throw Error('Dane logowania są niepoprawane');
+        if (data?.login.user.confirmed) {
+          return data as unknown as Awaitable<CustomJWTUser>;
         }
+        return null;
       },
     }),
   ],
