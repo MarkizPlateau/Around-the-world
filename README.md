@@ -15,3 +15,6 @@ If you want to use gmail account for this purpose, create a google app password:
 
 **Tailwind CSS Chakra UI**
 Due to the fact that I wanted to focus more on logic in the project, I decided to use Chakra UI, but I left Tailwind because I would like to use it even to write maybe a few views.
+
+**Account Confirmation View url in Strapi**
+Strapi/Settings/Advanced settings/Redirection url - http://localhost:3000/account-confirmation (Your localhost address)

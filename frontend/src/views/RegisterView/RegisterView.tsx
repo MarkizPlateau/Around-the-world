@@ -15,6 +15,7 @@ import {
   LinkNext,
 } from '@/components';
 import { bindProperty } from '@/model/mvvm';
+import { ROUTES } from '@/constants/routes';
 
 type RegisterViewType = {
   model: RegisterViewModel;
@@ -91,7 +92,7 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
       />
       <HStack justifyContent="center">
         <Text>Masz już konto?</Text>
-        <LinkNext route="/login">
+        <LinkNext route={ROUTES.LOGIN}>
           <Text width="min-content" as="span" color="pink" fontWeight="600">
             Zaloguj się
           </Text>

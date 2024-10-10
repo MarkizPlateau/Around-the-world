@@ -7,7 +7,7 @@ const generateRoutes = (category: string) => ({
 
 export const ROUTES = {
   HOME: '/',
-  SIGN_IN: '/sign-in',
+  LOGIN: '/login',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
