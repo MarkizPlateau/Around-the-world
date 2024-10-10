@@ -6,13 +6,35 @@ import { NextPage } from 'next';
 import { LoginViewModel } from './LoginViewModel';
 import { LoginViewModelBuilder } from './LoginViewModelBuilder';
 import { FormWrapper } from '@/wrappers';
-import { Alert, AlertIcon, AlertTitle, Heading, Text, VStack } from '@chakra-ui/react';
-import { CustomFormControl, CustomInput, CustomPasswordInput, FormButton } from '@/components';
+import { Alert, AlertIcon, AlertTitle, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import {
+  CustomFormControl,
+  CustomInput,
+  CustomPasswordInput,
+  FormButton,
+  LinkNext,
+} from '@/components';
 import { bindProperty } from '@/model/mvvm';
+import { ROUTES } from '@/constants/routes';
 
 type LoginViewType = {
   model: LoginViewModel;
 };
+
+const hStackContent = [
+  {
+    text: 'Nie masz konta?',
+    url: ROUTES.REGISTER,
+    linkText: 'Zarejestruj się',
+    id: 1,
+  },
+  {
+    text: 'Zapomniałeś hasła?',
+    url: ROUTES.FORGOT_PASSWORD,
+    linkText: 'Odzyskaj konto',
+    id: 2,
+  },
+];
 
 const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) => {
   return (
@@ -59,6 +81,18 @@ const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) =
         isLoading={model.isApiDataLoading}
         my="10"
       />
+      {hStackContent.map((item) => {
+        return (
+          <HStack justifyContent="center" my="2" key={item.id}>
+            <Text>{item.text}</Text>
+            <LinkNext route={item.url}>
+              <Text width="min-content" as="span" color="pink" fontWeight="600">
+                {item.linkText}
+              </Text>
+            </LinkNext>
+          </HStack>
+        );
+      })}
     </FormWrapper>
   );
 });

@@ -3,6 +3,7 @@ import { Command, Model } from '../mvvm';
 import { signIn } from 'next-auth/react';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/helpers';
 import { forgotPassword, registerUser, resetPassword } from '@/calls/auth';
+import { ROUTES } from '@/constants/routes';
 
 export class AuthorizationModel extends Model {
   username: string = '';
@@ -56,7 +57,7 @@ export class AuthorizationModel extends Model {
           username: this.email || this.username,
           password: this.password,
           redirect: false,
-          callbackUrl: '/',
+          callbackUrl: ROUTES.HOME,
         });
         if (response?.error) {
           this.setServerErrors(response.error);
@@ -134,17 +135,13 @@ export class AuthorizationModel extends Model {
             passwordConfirmation: this.passwordConfirmation,
             code: this.resetPasswordCode,
           })
-            .then((e: any) => {
+            .then(() => {
               runInAction(() => {
                 this.successfulSendForm = true;
               });
             })
             .catch((e: ErrorEvent) => {
-              if (e.message === 'Incorrect code provided') {
-                this.setServerErrors('');
-              } else {
-                this.setServerErrors(e.message);
-              }
+              this.setServerErrors(e.message);
             })
             .finally(() => {
               this.setIsLoading(false);

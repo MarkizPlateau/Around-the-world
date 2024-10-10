@@ -7,6 +7,8 @@ export class ResetPasswordViewModel extends AuthorizationModel {
   constructor(apiData: ResetPasswordViewApiData) {
     super();
     this.dummy = apiData.dummy;
+    this.resetPasswordCode = apiData.resetPasswordCode;
+
     extendObservable(this, {
       dummy: this.dummy,
     });
