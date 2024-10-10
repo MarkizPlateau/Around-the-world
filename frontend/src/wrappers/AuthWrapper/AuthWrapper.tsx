@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect, ReactNode, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { CustomSession } from '@/app/api/auth/[...nextauth]/authOptions';
 import { makeClient } from '@/apollo/client';
@@ -14,14 +14,17 @@ export function useAuth() {
     setAuthToken(customSession?.jwt);
   }, [customSession?.jwt]);
 
+  const getClient = useMemo(() => {
+    return () => makeClient(authToken);
+  }, [authToken]);
+
   return {
-    getClient: () => makeClient(authToken),
+    getClient,
     isLogged: authToken !== undefined,
   };
 }
 
 export function AuthWrapper({ children }: { children: ReactNode }) {
   const { getClient } = useAuth();
-
   return <ApolloNextAppProvider makeClient={getClient}>{children}</ApolloNextAppProvider>;
 }
