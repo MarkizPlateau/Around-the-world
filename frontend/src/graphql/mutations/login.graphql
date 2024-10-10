@@ -4,6 +4,7 @@ mutation Login($identifier: String!, $password: String!) {
     user {
       id
       confirmed
+      username
     }
   }
 }

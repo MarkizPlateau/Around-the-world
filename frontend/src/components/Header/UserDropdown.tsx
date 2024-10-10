@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { Text } from '@chakra-ui/react';
 
 // TODO
 const menuItems = [
@@ -8,7 +8,7 @@ const menuItems = [
   { name: 'Sign out', href: '#' },
 ];
 
-export const Dropdown: FC = () => {
+export const Dropdown = ({ username }: { username: string | undefined }) => {
   return (
     <Menu as="div" className="relative ml-3">
       <div>
@@ -27,6 +27,8 @@ export const Dropdown: FC = () => {
         as="ul"
         className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
       >
+        <Text textAlign="center">{username}</Text>
+
         {menuItems.map((item) => {
           return (
             <MenuItem as="li" key={item.name}>

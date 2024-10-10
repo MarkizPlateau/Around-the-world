@@ -7,17 +7,24 @@ export interface CustomJWTUser extends DefaultUser {
   jwt: string;
   user: {
     id: number;
+    username: string;
   };
 }
 
 export type customToken = JWT & {
   jwt: string;
-  id: number;
+  user: {
+    id: number;
+    username: string;
+  };
 };
 
 export interface CustomSession extends DefaultSession {
   jwt: string;
-  id: number;
+  user: {
+    id: number;
+    username: string;
+  } & DefaultSession['user'];
 }
 
 export const authOptions: NextAuthOptions = {
@@ -49,20 +56,23 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: async ({ token, user, trigger }) => {
       const isUser = !!user;
+      const customToken = token as customToken;
       if (isUser && trigger === 'signIn') {
         const customUser = user as CustomJWTUser;
-        token.jwt = customUser.jwt;
-        token.id = customUser.user.id;
+        customToken.jwt = customUser.jwt;
+        customToken.user = customToken.user || {};
+        customToken.user.id = customUser.user.id;
+        customToken.user.username = customUser.user.username;
       }
-
-      return token;
+      return customToken;
     },
     session: async ({ session, token }) => {
       const customSession = session as CustomSession;
       const customToken = token as customToken;
 
       customSession.jwt = customToken.jwt;
-      customSession.id = customToken.id;
+      customSession.user = customToken.user;
+
       return customSession as CustomSession;
     },
   },

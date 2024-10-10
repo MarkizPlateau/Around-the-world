@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import Link from 'next/link';
 import { Disclosure, DisclosureButton } from '@headlessui/react';
 import { GlobeAsiaAustraliaIcon } from '@heroicons/react/24/outline';
@@ -8,8 +8,14 @@ import { NAVIGATION } from '@/constants/navigation';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import Dropdown from './UserDropdown';
 import MobileNav from './MobileNav';
+import { useSession } from 'next-auth/react';
+import { CustomSession } from '@/app/api/auth/[...nextauth]/authOptions';
 
 export const Header: FC = () => {
+  const { data } = useSession() as { data: CustomSession | null };
+
+  const username = useMemo(() => data?.user?.username, [data]);
+
   return (
     <header>
       <Disclosure as="nav" className="bg-pink">
@@ -64,7 +70,7 @@ export const Header: FC = () => {
                 <BellIcon aria-hidden="true" className="h-6 w-6" />
               </button>
 
-              <Dropdown />
+              <Dropdown username={username} />
             </div>
           </div>
         </div>
