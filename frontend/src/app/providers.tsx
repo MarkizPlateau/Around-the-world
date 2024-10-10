@@ -2,18 +2,18 @@
 
 import { PropsWithChildren } from 'react';
 import { SessionProvider } from 'next-auth/react';
-import { ApolloWrapper } from '@/wrappers/ApolloWrapper/ApolloWrapper';
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
+import { AuthWrapper } from '@/wrappers';
 
 export function Providers({ children }: PropsWithChildren) {
   return (
     <SessionProvider>
-      <ApolloWrapper>
+      <AuthWrapper>
         <CacheProvider>
           <ChakraProvider>{children}</ChakraProvider>
         </CacheProvider>
-      </ApolloWrapper>
+      </AuthWrapper>
     </SessionProvider>
   );
 }

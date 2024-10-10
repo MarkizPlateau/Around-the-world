@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import { Command, Model } from '../mvvm';
-import { signIn, SignInResponse } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/helpers';
 import { forgotPassword, registerUser, resetPassword } from '@/calls/auth';
 
@@ -56,6 +56,7 @@ export class AuthorizationModel extends Model {
           username: this.email || this.username,
           password: this.password,
           redirect: false,
+          callbackUrl: '/',
         });
         if (response?.error) {
           this.setServerErrors(response.error);
@@ -65,6 +66,12 @@ export class AuthorizationModel extends Model {
             this.isApiDataLoading = false;
             this.successfulLogin = true;
           });
+          // TODO
+          // Redirect in NextAuthOptions and callbackUrl in signIn do not work properly,
+          // so I temporarily use this solution
+          if (response?.ok && response.url) {
+            window.location.href = response.url;
+          }
         }
       },
 

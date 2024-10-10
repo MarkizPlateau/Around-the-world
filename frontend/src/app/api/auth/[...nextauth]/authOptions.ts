@@ -1,4 +1,4 @@
-import { Awaitable, DefaultSession, DefaultUser, NextAuthOptions, User } from 'next-auth';
+import { Awaitable, DefaultSession, DefaultUser, NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { loginUser } from '@/calls/auth';
 import { JWT } from 'next-auth/jwt';
@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
       authorize: async (credentials) => {
         const data = await loginUser(credentials);
         if (data?.login.user.confirmed) {
-          return data as unknown as Awaitable<CustomJWTUser>;
+          return data?.login as unknown as Awaitable<CustomJWTUser>;
         }
         return null;
       },
@@ -52,8 +52,9 @@ export const authOptions: NextAuthOptions = {
       if (isUser && trigger === 'signIn') {
         const customUser = user as CustomJWTUser;
         token.jwt = customUser.jwt;
-        token.id = customUser.id;
+        token.id = customUser.user.id;
       }
+
       return token;
     },
     session: async ({ session, token }) => {

@@ -10,15 +10,22 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.error(`[Network error]: ${networkError}`);
 });
 
-const httpLink = new HttpLink({
-  uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
-  fetchOptions: { cache: 'no-store' },
-});
+const httpLink = (headers?: Record<string, string>) => {
+  return new HttpLink({
+    uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+    fetchOptions: { cache: 'no-store' },
+    headers: headers,
+  });
+};
 
-export function makeClient() {
+export function makeClient(jwt?: string | undefined) {
+  const headers: Record<string, string> = {};
+  if (jwt) {
+    headers['Authorization'] = 'Bearer ' + jwt;
+  }
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: from([errorLink, httpLink]),
+    link: from([errorLink, httpLink(headers)]),
   });
 }
 
