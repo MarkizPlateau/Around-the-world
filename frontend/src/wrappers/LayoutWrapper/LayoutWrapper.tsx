@@ -7,7 +7,6 @@ import { ROUTES } from '@/constants/routes';
 
 export default function LayoutWrapper({ children }: PropsWithChildren) {
   const path = usePathname();
-
   return (
     <>
       {path !== ROUTES.HOME && <Header />}
