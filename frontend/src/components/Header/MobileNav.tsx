@@ -1,36 +1,76 @@
-import { FC } from 'react';
-import Link from 'next/link';
-import { DisclosureButton, DisclosurePanel } from '@headlessui/react';
-import { classNames } from '@/utils';
+import { useRef } from 'react';
 import { NAVIGATION } from '@/constants/navigation';
+import { Box, IconButton, Menu, MenuButton, MenuItem, useDisclosure } from '@chakra-ui/react';
+import { LinkNext } from '../UI';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useOutsideClick } from '@/hooks';
 
-export const MobileNav: FC = () => {
+type MobileNavType = {
+  pathname: string;
+};
+
+export const MobileNav = ({ pathname }: MobileNavType) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const ref = useRef<HTMLDivElement>(null);
+  useOutsideClick({ ref, onClose });
+
+  const menuButton = (
+    <MenuButton
+      _active={{ background: 'inherit' }}
+      _focus={{ background: 'inherit' }}
+      alignSelf="flex-end"
+      aria-label="Options"
+      as={IconButton}
+      bg="#c62e65"
+      icon={
+        isOpen ? <CloseIcon color="white" fontSize="20px" /> : <HamburgerIcon fontSize="24px" />
+      }
+      onClick={isOpen ? onClose : onOpen}
+    />
+  );
+
   return (
-    <DisclosurePanel className="sm:hidden">
-      <ul className="space-y-1 px-2 pb-3 pt-2">
-        {NAVIGATION.map((item) => (
-          <Link
-            href={typeof item.href === 'function' ? String(item.href('eco')) : item.href}
-            legacyBehavior
-            as="li"
-            key={item.name}
-          >
-            <DisclosureButton
-              as="a"
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                item.current
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          </Link>
-        ))}
-      </ul>
-    </DisclosurePanel>
+    <Menu>
+      {isOpen ? (
+        <Box
+          background="#c62e65"
+          borderBottomRadius="xl"
+          display="flex"
+          flexDirection="column"
+          left="0"
+          p="4"
+          position="absolute"
+          top="0"
+          width="100vw"
+          zIndex="2"
+        >
+          {menuButton}
+          <Box as="ul" pb="2" pt="6" ref={ref}>
+            {NAVIGATION.map((item, index) => {
+              return (
+                <MenuItem
+                  bg={pathname === item.href ? 'white' : 'inherit'}
+                  borderBottom="1px solid white"
+                  borderTop={index === 0 ? '1px solid white' : 'unset'}
+                  color={pathname === item.href ? 'black' : 'white'}
+                  key={item.name}
+                  py="2"
+                >
+                  <LinkNext
+                    route={typeof item.href === 'function' ? String(item.href('eco')) : item.href}
+                    onClick={onClose}
+                  >
+                    {item.name}
+                  </LinkNext>
+                </MenuItem>
+              );
+            })}
+          </Box>
+        </Box>
+      ) : (
+        menuButton
+      )}
+    </Menu>
   );
 };
 
