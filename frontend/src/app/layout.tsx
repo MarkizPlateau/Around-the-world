@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
+import { DynaPuff } from 'next/font/google';
 import './../styles/globals.css';
 import { Providers } from './providers';
 import LayoutWrapper from '@/wrappers/LayoutWrapper/LayoutWrapper';
 
-const lato = Lato({ weight: ['400', '700'], subsets: ['latin'] });
+const lato = Lato({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-lato' });
+
+const dynaPuff = DynaPuff({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-dynaPuff',
+});
 
 export const metadata: Metadata = {
   title: 'Around the world',
@@ -18,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.className} h-screen w-screen`}>
+      <body className={`${dynaPuff.variable} ${lato.variable} h-screen w-screen`}>
         <Providers>
           <LayoutWrapper>{children}</LayoutWrapper>
         </Providers>

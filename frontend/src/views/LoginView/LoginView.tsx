@@ -39,7 +39,7 @@ const hStackContent = [
 const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) => {
   return (
     <FormWrapper>
-      <Heading as="h1" fontSize="3xl" color="purple" textAlign="center">
+      <Heading as="h1" color="purple" fontSize="3xl" textAlign="center">
         Zaloguj się
       </Heading>
       <Text fontSize="medium" my="6">
@@ -50,43 +50,43 @@ const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) =
           <CustomInput {...bindProperty(model, 'username')} placeholder="Nazwa użytkownika" />
         </CustomFormControl>
         <CustomFormControl
-          labelTitle="E-mail"
-          isInvalid={model.showErrors && !model.isEmailCorrect && !model.isUsername}
           errorMessage="Wymagana jest nazwa użytkownika lub prawidłowy e-mail"
+          isInvalid={model.showErrors && !model.isEmailCorrect && !model.isUsername}
+          labelTitle="E-mail"
         >
           <CustomInput {...bindProperty(model, 'email')} placeholder="Adres e-mail" />
         </CustomFormControl>
         <CustomFormControl
-          labelTitle="Hasło"
-          isInvalid={model.showErrors && !model.isPasswordCorrect}
           errorMessage="Hasło musi zawierać minimum 6 znaków, w tym przynajmniej jedną dużą literę, jedną małą literę i jedną cyfrę."
+          isInvalid={model.showErrors && !model.isPasswordCorrect}
+          labelTitle="Hasło"
         >
           <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Hasło" />
         </CustomFormControl>
       </VStack>
 
       {model.serverErrors && (
-        <Alert status="error" mt="3" colorScheme="red">
+        <Alert colorScheme="red" mt="3" status="error">
           <AlertIcon />
           <AlertTitle mr="2">{model.serverErrors}</AlertTitle>
         </Alert>
       )}
 
       <FormButton
-        colorScheme="pink"
         borderRadius="xl"
         color="white"
+        colorScheme="pink"
         command={model.login}
-        text="Zaloguj się"
         isLoading={model.isApiDataLoading}
         my="10"
+        text="Zaloguj się"
       />
       {hStackContent.map((item) => {
         return (
-          <HStack justifyContent="center" my="2" key={item.id}>
+          <HStack justifyContent="center" key={item.id} my="2">
             <Text>{item.text}</Text>
             <LinkNext route={item.url}>
-              <Text width="min-content" as="span" color="pink" fontWeight="600">
+              <Text as="span" color="pink" fontWeight="600" width="min-content">
                 {item.linkText}
               </Text>
             </LinkNext>
