@@ -6,6 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --font-lato: 'Lato', sans-serif;
+  --font-dynaPuff: 'DynaPuff', cursive;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,14 +15,29 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --font-lato: 'Lato', sans-serif;
+    --font-dynaPuff: 'DynaPuff', cursive;
   }
 }
 
 body {
   @apply font-sans;
+}
+
+body {
+  font-family: var(--font-lato), sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-lato), sans-serif;
 }
 
 @layer utilities {
@@ -31,4 +48,8 @@ body {
 
 .text-shadow {
   text-shadow: 1px 1px black;
+}
+
+.font-puff {
+  font-family: var(--font-dynaPuff), sans-serif;
 }

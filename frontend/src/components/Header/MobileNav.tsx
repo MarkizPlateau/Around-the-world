@@ -21,7 +21,7 @@ export const MobileNav = ({ pathname }: MobileNavType) => {
       alignSelf="flex-end"
       aria-label="Options"
       as={IconButton}
-      bg="#c62e65"
+      bg="main"
       icon={
         isOpen ? <CloseIcon color="white" fontSize="20px" /> : <HamburgerIcon fontSize="24px" />
       }
@@ -33,7 +33,7 @@ export const MobileNav = ({ pathname }: MobileNavType) => {
     <Menu>
       {isOpen ? (
         <Box
-          background="#c62e65"
+          background="main"
           borderBottomRadius="xl"
           display="flex"
           flexDirection="column"

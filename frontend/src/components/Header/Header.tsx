@@ -15,7 +15,7 @@ export const Header: FC = () => {
   const { data } = useCustomSession();
   const username = useMemo(() => data?.user?.username, [data]);
   return (
-    <Box backgroundColor="#c62e65" position="relative">
+    <Box backgroundColor="main" position="relative">
       <Flex
         alignItems="center"
         as="header"

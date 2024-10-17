@@ -10,14 +10,14 @@ export const FormWrapper = observer(({ children, ...props }: FormWrapperProps) =
       bg="white"
       borderRadius={{ base: '0', sm: '2xl' }}
       boxShadow="login"
-      mt={{ base: '0', sm: '40' }}
-      mx="auto"
       maxWidth={{ base: '100vw', md: '600px' }}
-      py="10"
+      mt={{ base: '0', sm: '20' }}
+      mx="auto"
       px={['4', '100']}
+      py="10"
       {...props}
     >
-      <Flex mx="auto" flexDirection="column">
+      <Flex flexDirection="column" mx="auto">
         {children}
       </Flex>
     </Box>
