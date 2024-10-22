@@ -51,7 +51,7 @@ const ResetPasswordView: NextPage<ResetPasswordViewType> = observer(({ model }) 
         </Alert>
       )}
 
-      {true && (
+      {model.successfulSendForm && (
         <Alert borderRadius="base" colorScheme="green" mt="3" status="success">
           <AlertIcon />
           <HStack justifyContent="center" my="2">

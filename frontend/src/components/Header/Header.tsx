@@ -9,13 +9,15 @@ import MobileNav from './MobileNav';
 import Dropdown from './UserDropdown';
 import { LinkNext } from '../UI';
 import { GlobeAsiaAustraliaIcon } from '@heroicons/react/24/outline';
+import ColorModeSwitcher from '../ColorModeSwitcher/ColorModeSwitcher';
 
 export const Header: FC = () => {
   const pathname = usePathname();
   const { data } = useCustomSession();
   const username = useMemo(() => data?.user?.username, [data]);
+
   return (
-    <Box backgroundColor="main" position="relative">
+    <Box backgroundColor="main" boxShadow="base" position="relative">
       <Flex
         alignItems="center"
         as="header"
@@ -40,7 +42,9 @@ export const Header: FC = () => {
               return (
                 <LinkNext
                   _hover={{ color: 'white' }}
+                  className="font-puff"
                   color={pathname === item.href ? 'white' : 'black'}
+                  fontSize="lg"
                   key={item.name}
                   px="2"
                   route={typeof item.href === 'function' ? String(item.href('eco')) : item.href}
@@ -51,7 +55,10 @@ export const Header: FC = () => {
             })}
           </Flex>
         </Flex>
-        <Dropdown username={username} />
+        <Flex gap="4">
+          <ColorModeSwitcher />
+          <Dropdown username={username} />
+        </Flex>
       </Flex>
     </Box>
   );

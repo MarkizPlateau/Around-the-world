@@ -39,7 +39,7 @@ const hStackContent = [
 const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) => {
   return (
     <FormWrapper>
-      <Heading as="h1" color="purple" fontSize="3xl" textAlign="center">
+      <Heading as="h1" fontSize="3xl" textAlign="center">
         Zaloguj się
       </Heading>
       <Text fontSize="medium" my="6">
