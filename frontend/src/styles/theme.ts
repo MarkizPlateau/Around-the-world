@@ -16,5 +16,6 @@ export const theme = extendTheme({
   fonts: {
     heading: 'var(--font-lato)',
     body: 'var(--font-lato)',
+    puff: 'var(--font-dynaPuff)',
   },
 });

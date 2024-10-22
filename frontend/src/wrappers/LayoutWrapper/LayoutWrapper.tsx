@@ -8,6 +8,7 @@ import { Box } from '@chakra-ui/react';
 
 export default function LayoutWrapper({ children }: PropsWithChildren) {
   const path = usePathname();
+  const isHome = path === ROUTES.HOME;
   return (
     <Box
       h="100vh"
@@ -21,13 +22,11 @@ export default function LayoutWrapper({ children }: PropsWithChildren) {
       }}
       w="100vw"
     >
-      {path !== ROUTES.HOME && <Header />}
-      {path === ROUTES.HOME ? (
+      {!isHome && <Header />}
+      {isHome ? (
         <>{children}</>
       ) : (
-        <Box as="main" maxW="screen-2xl" mx="auto" position="relative" px={{ base: 0, '2xl': 2 }}>
-          {children}
-        </Box>
+        <main className="relative mx-auto max-w-screen-2xl 2xl:px-2">{children}</main>
       )}
     </Box>
   );
