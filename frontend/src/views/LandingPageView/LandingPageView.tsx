@@ -7,7 +7,7 @@ const zIndexShadowClasses = 'z-20 text-shadow';
 const h2Classes = 'font-bold text-4xl lg:text-6xl text-center font-puff';
 const h3Classes = 'text-2xl lg:text-4xl  font-bold text-center  pointer-events-none font-puff';
 const imgClasses =
-  'absolute inset-0 w-full h-full object-cover opacity-70 lg:opacity-30 hover:opacity-85';
+  'absolute inset-0 w-full h-full object-cover opacity-70 lg:opacity-45 hover:opacity-90';
 const imageContainerClasses = 'w-1/2  text-white flex items-center justify-center relative';
 const anchorClasses = 'absolute inset-0 flex items-center justify-center';
 
