@@ -1,39 +1,31 @@
 'use client';
 
-import { withModel } from '@/utils/hooks/withModel';
-import { observer } from 'mobx-react';
 import { NextPage } from 'next';
-import { RegisterViewModel } from './RegisterViewModel';
-import { RegisterViewModelBuilder } from './RegisterViewModelBuilder';
+import { observer } from 'mobx-react';
 import { FormWrapper } from '@/wrappers';
-import { Alert, AlertIcon, AlertTitle, Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
-import {
-  CustomFormControl,
-  CustomInput,
-  CustomPasswordInput,
-  FormButton,
-  LinkNext,
-} from '@/components';
+import { MyProfileViewModel } from './MyProfileViewModel';
+import { MyProfileViewModelBuilder } from './MyProfileViewModelBuilder';
+import { withModel } from '@/utils/hooks/withModel';
+import { Alert, AlertIcon, AlertTitle, Box, Heading, VStack } from '@chakra-ui/react';
+import { CustomFormControl, CustomInput, CustomPasswordInput, FormButton } from '@/components';
 import { bindProperty } from '@/model/mvvm';
-import { ROUTES } from '@/constants/routes';
 
-type RegisterViewType = {
-  model: RegisterViewModel;
+type MyProfileViewType = {
+  model: MyProfileViewModel;
 };
 
-const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterViewType) => {
+const MyProfileView: NextPage<MyProfileViewType> = observer(({ model }: MyProfileViewType) => {
   return (
     <FormWrapper>
       <Heading as="h1" color="purple" fontSize="3xl" mb="6" textAlign="center">
-        Utwórz konto
+        Twój profil
       </Heading>
       <VStack gap="4" mb="6">
-        <CustomFormControl
-          errorMessage="Podaj nazwę użytkownika"
-          isInvalid={model.showErrors && !model.isUsername}
-          labelTitle="Nazwa użytkownika"
-        >
-          <CustomInput {...bindProperty(model, 'username')} placeholder="Nazwa użytkownika" />
+        <CustomFormControl errorMessage="Podaj nazwę użytkownika" labelTitle="Nazwa użytkownika">
+          <CustomInput
+            {...bindProperty(model.userData, 'username')}
+            placeholder="Nazwa użytkownika"
+          />
         </CustomFormControl>
         <CustomFormControl
           errorMessage="Nieprawidłowy adres e-mail"
@@ -72,12 +64,7 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
         <Alert borderRadius="base" colorScheme="green" mt="3" status="success">
           <AlertIcon />
           <Box>
-            <AlertTitle mr="2">Gratulacje! Rejestracja zakończona sukcesem!</AlertTitle>
-
-            <Text>
-              Aby aktywować swoje konto, wystarczy potwierdzić rejestrację, korzystając z
-              wiadomości, którą wysłaliśmy na Twój adres e-mail.
-            </Text>
+            <AlertTitle mr="2">Twoje dane zostały zmienione!</AlertTitle>
           </Box>
         </Alert>
       )}
@@ -85,24 +72,16 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
         borderRadius="xl"
         color="white"
         colorScheme="pink"
-        command={model.register}
+        command={model.updateUser}
         isLoading={model.isApiDataLoading}
         my="10"
-        text="Zarejestruj się"
+        text="Zmień dane"
       />
-      <HStack justifyContent="center">
-        <Text>Masz już konto?</Text>
-        <LinkNext route={ROUTES.LOGIN}>
-          <Text as="span" color="pink" fontWeight="600" width="min-content">
-            Zaloguj się
-          </Text>
-        </LinkNext>
-      </HStack>
     </FormWrapper>
   );
 });
 
-export default withModel<RegisterViewModel, RegisterViewModelBuilder>(
-  RegisterView,
-  RegisterViewModelBuilder,
+export default withModel<MyProfileViewModel, MyProfileViewModelBuilder>(
+  MyProfileView,
+  MyProfileViewModelBuilder,
 );

@@ -34,6 +34,9 @@ export const Dropdown = ({ username }: { username: string | undefined }) => {
               '> *:hover': {
                 background: '#EDF2F7',
               },
+              '& * *': {
+                width: '100%',
+              },
             }}
           >
             <MenuItem as="li" cursor="pointer">

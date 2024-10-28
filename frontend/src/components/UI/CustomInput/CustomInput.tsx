@@ -1,6 +1,7 @@
-import { Box, forwardRef, Input, InputGroup, InputProps } from '@chakra-ui/react';
 import React from 'react';
+import { Box, forwardRef, Input, InputGroup, InputProps } from '@chakra-ui/react';
 import { AiFillCheckCircle } from 'react-icons/ai';
+import { handlePostcodeKeyPress } from '@/utils';
 export type CustomInputProps = Omit<InputProps, 'value' | 'onChange'> & {
   value: string;
   onChange: (value: string) => void;
@@ -19,44 +20,24 @@ export const CustomInput = forwardRef<CustomInputProps, 'input'>(
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (postcode) {
-        const allowedKeys = [
-          '0',
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '-',
-          'Backspace',
-          'Tab',
-          'ArrowLeft',
-          'ArrowRight',
-        ];
-
-        if (allowedKeys.indexOf(event.key) === -1) {
-          event.preventDefault();
-        }
+        handlePostcodeKeyPress(event);
       }
     };
     return (
-      <InputGroup width={props.width} position="relative">
+      <InputGroup position="relative" width={props.width}>
         <Input
+          _placeholder={{ color: 'gray.500' }}
+          borderColor={isCorrect ? 'green.400' : isUncorrect ? 'red.400' : 'gray.600'}
           ref={ref}
+          value={value}
           onChange={handleChange}
           onClick={onInputClick}
           onKeyDown={handleKeyPress}
-          value={value}
-          _placeholder={{ color: 'gray.500' }}
-          borderColor={isCorrect ? 'green.400' : isUncorrect ? 'red.400' : 'gray.600'}
           {...props}
         />
         {isCorrect && (
           <Box position="absolute" right="10px" top="8px">
-            <AiFillCheckCircle fontSize="21px" color="#20690E" />
+            <AiFillCheckCircle color="#20690E" fontSize="21px" />
           </Box>
         )}
       </InputGroup>
