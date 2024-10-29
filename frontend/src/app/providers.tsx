@@ -6,18 +6,23 @@ import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { AuthWrapper } from '@/wrappers';
 import { theme } from '@/styles/theme';
+import { NavigationProvider } from '@/providers/NavigationProvider/NavigationProvider';
 
-export function Providers({ children }: PropsWithChildren) {
+type ProvidersProps = PropsWithChildren<{ session: any }>;
+
+export function Providers({ children, session }: ProvidersProps) {
   return (
-    <SessionProvider>
-      <AuthWrapper>
-        <CacheProvider>
-          <ChakraProvider theme={theme}>
-            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-            {children}
-          </ChakraProvider>
-        </CacheProvider>
-      </AuthWrapper>
+    <SessionProvider session={session}>
+      <NavigationProvider>
+        <AuthWrapper>
+          <CacheProvider>
+            <ChakraProvider theme={theme}>
+              <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+              {children}
+            </ChakraProvider>
+          </CacheProvider>
+        </AuthWrapper>
+      </NavigationProvider>
     </SessionProvider>
   );
 }

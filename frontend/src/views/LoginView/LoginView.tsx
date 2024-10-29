@@ -1,8 +1,10 @@
 'use client';
 
-import { withModel } from '@/utils/hooks/withModel';
+import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { NextPage } from 'next';
+import { bindProperty } from '@/model/mvvm';
+import { withModel } from '@/utils/hooks/withModel';
 import { LoginViewModel } from './LoginViewModel';
 import { LoginViewModelBuilder } from './LoginViewModelBuilder';
 import { FormWrapper } from '@/wrappers';
@@ -14,8 +16,8 @@ import {
   FormButton,
   LinkNext,
 } from '@/components';
-import { bindProperty } from '@/model/mvvm';
 import { ROUTES } from '@/constants/routes';
+import { useNavigationContext } from '@/providers/NavigationProvider/NavigationProvider';
 
 type LoginViewType = {
   model: LoginViewModel;
@@ -37,6 +39,12 @@ const hStackContent = [
 ];
 
 const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) => {
+  const { previousRoute } = useNavigationContext();
+  useEffect(() => {
+    if (previousRoute) {
+      model.setPreviousRoute(previousRoute);
+    }
+  }, [previousRoute]);
   return (
     <FormWrapper>
       <Heading as="h1" fontSize="3xl" textAlign="center">
