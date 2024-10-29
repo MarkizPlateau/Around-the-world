@@ -6,7 +6,7 @@ import { JWT } from 'next-auth/jwt';
 export interface CustomJWTUser extends DefaultUser {
   jwt: string;
   user: {
-    id: number;
+    id: string;
     username: string;
   };
 }
@@ -14,7 +14,7 @@ export interface CustomJWTUser extends DefaultUser {
 export type customToken = JWT & {
   jwt: string;
   user: {
-    id: number;
+    id: string;
     username: string;
   };
 };
@@ -22,7 +22,7 @@ export type customToken = JWT & {
 export interface CustomSession extends DefaultSession {
   jwt: string;
   user: {
-    id: number;
+    id: string;
     username: string;
   } & DefaultSession['user'];
 }

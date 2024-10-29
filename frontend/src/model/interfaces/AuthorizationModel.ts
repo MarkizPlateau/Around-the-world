@@ -38,6 +38,7 @@ export class AuthorizationModel extends Model {
       serverErrors: observable,
       showErrors: observable,
       successfulSendForm: observable,
+      successfulLogin: observable,
 
       isUsername: computed,
       trimEmail: computed,
@@ -67,12 +68,6 @@ export class AuthorizationModel extends Model {
             this.isApiDataLoading = false;
             this.successfulLogin = true;
           });
-          // TODO
-          // Redirect in NextAuthOptions and callbackUrl in signIn do not work properly,
-          // so I temporarily use this solution
-          if (response?.ok && response.url) {
-            window.location.href = response.url;
-          }
         }
       },
 

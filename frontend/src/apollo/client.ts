@@ -1,3 +1,4 @@
+import { getCustomSession } from '@/hooks';
 import { from, HttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { ApolloClient, InMemoryCache } from '@apollo/experimental-nextjs-app-support';
@@ -30,3 +31,9 @@ export function makeClient(jwt?: string | undefined) {
 }
 
 export const client = makeClient();
+
+export const useClientWithGetSession = async () => {
+  const session = await getCustomSession();
+  const client = makeClient(session.jwt);
+  return client;
+};
