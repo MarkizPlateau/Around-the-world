@@ -43,7 +43,7 @@ function NotFoundPage() {
         size="lg"
         onClick={() => router.push(ROUTES.HOME)}
       >
-        Fly to the main
+        Fly to the main page
       </Button>
     </Flex>
   );
