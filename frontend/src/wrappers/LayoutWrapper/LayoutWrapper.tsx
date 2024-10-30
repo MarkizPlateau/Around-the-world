@@ -21,12 +21,16 @@ export default function LayoutWrapper({ children }: PropsWithChildren) {
         },
       }}
       w="100vw"
+      display={isHome ? 'block' : 'flex'}
+      flexDirection="column"
     >
       {!isHome && <Header />}
       {isHome ? (
         <>{children}</>
       ) : (
-        <main className="relative mx-auto max-w-screen-2xl 2xl:px-2">{children}</main>
+        <Box mx="auto" as="main" position="relative" maxWidth="80rem" width="100%" flex="1">
+          {children}
+        </Box>
       )}
     </Box>
   );

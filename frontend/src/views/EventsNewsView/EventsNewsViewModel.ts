@@ -1,10 +1,10 @@
 import { Model } from '@/model/mvvm';
 import { extendObservable, makeObservable, observable } from 'mobx';
-import { EventsViewApiData } from './EventsViewModelBuilder';
+import { EventsNewsViewApiData } from './EventsNewsViewModelBuilder';
 
-export class EventsViewModel extends Model {
+export class EventsNewsViewModel extends Model {
   dummy: string;
-  constructor(apiData: EventsViewApiData) {
+  constructor(apiData: EventsNewsViewApiData) {
     super();
     this.dummy = apiData.dummy;
     extendObservable(this, {

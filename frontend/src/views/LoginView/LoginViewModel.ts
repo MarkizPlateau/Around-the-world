@@ -1,18 +1,11 @@
-import { extendObservable, makeObservable, observable, reaction } from 'mobx';
-import { LoginViewApiData } from './LoginViewModelBuilder';
+import { makeObservable, observable, reaction } from 'mobx';
 import { AuthorizationModel } from '@/model/interfaces/AuthorizationModel';
 import { ROUTES } from '@/constants/routes';
 
 export class LoginViewModel extends AuthorizationModel {
-  dummy: string;
   previousRoute: string = ROUTES.HOME;
-  constructor(apiData: LoginViewApiData) {
+  constructor() {
     super();
-    this.dummy = apiData.dummy;
-    extendObservable(this, {
-      dummy: this.dummy,
-    });
-
     makeObservable(this, {
       previousRoute: observable,
     });

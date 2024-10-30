@@ -43,6 +43,7 @@ export const MobileNav = ({ pathname }: MobileNavType) => {
           top="0"
           width="100vw"
           zIndex="2"
+          as="nav"
         >
           {menuButton}
           <Box as="ul" pb="2" pt="6" ref={ref}>

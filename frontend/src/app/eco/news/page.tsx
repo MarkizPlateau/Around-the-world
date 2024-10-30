@@ -1,8 +1,8 @@
-import EcoNewsView from '@/views/Eco/EcoNewsView/EcoNewsView';
+import EcoNewsView from '@/views/EcoNewsView/EcoNewsView';
 import {
   EcoNewsViewApiData,
   EcoNewsViewModelBuilder,
-} from '@/views/Eco/EcoNewsView/EcoNewsViewModelBuilder';
+} from '@/views/EcoNewsView/EcoNewsViewModelBuilder';
 
 export default async function Page() {
   const builder = new EcoNewsViewModelBuilder();

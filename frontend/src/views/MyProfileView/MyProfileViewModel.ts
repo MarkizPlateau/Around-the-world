@@ -6,16 +6,13 @@ import { MyProfileViewApiData } from './MyProfileViewModelBuilder';
 import { updateUser } from '@/calls/userData';
 
 export class MyProfileViewModel extends AuthorizationModel {
-  dummy: string;
   userData: USER_DATA;
   updateUser: Command<void, any>;
   constructor(apiData: MyProfileViewApiData) {
     super();
-    this.dummy = apiData.dummy;
     this.userData = apiData.userData;
     this.email = apiData.userData.email;
     extendObservable(this, {
-      dummy: this.dummy,
       userData: this.userData,
     });
 

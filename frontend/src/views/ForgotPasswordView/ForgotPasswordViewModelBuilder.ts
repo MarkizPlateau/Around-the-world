@@ -1,9 +1,7 @@
 import { IModelBuilder } from '@/model/mvvm';
 import { ForgotPasswordViewModel } from './ForgotPasswordViewModel';
 
-export type ForgotPasswordViewApiData = {
-  dummy: string;
-};
+export type ForgotPasswordViewApiData = {};
 export class ForgotPasswordViewModelBuilder
   implements IModelBuilder<ForgotPasswordViewModel, ForgotPasswordViewApiData>
 {
@@ -12,9 +10,7 @@ export class ForgotPasswordViewModelBuilder
   }
 
   async loadApiData() {
-    const apiData = {
-      dummy: 'dummy',
-    };
+    const apiData = {};
 
     return apiData;
   }
