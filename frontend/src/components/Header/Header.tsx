@@ -17,10 +17,9 @@ export const Header: FC = () => {
   const username = useMemo(() => data?.user?.username, [data]);
 
   return (
-    <Box backgroundColor="main" boxShadow="base" position="relative">
+    <Box backgroundColor="main" boxShadow="base" position="relative" as="header" zIndex="1">
       <Flex
         alignItems="center"
-        as="header"
         height={{ base: '72px' }}
         justifyContent="space-between"
         maxWidth="80rem"

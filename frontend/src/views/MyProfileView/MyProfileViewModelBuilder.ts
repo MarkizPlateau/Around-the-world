@@ -5,7 +5,6 @@ import { makeClient } from '@/apollo/client';
 import { getCustomServerSession } from '@/hooks';
 
 export type MyProfileViewApiData = {
-  dummy: string;
   userData: USER_DATA;
 };
 export class MyProfileViewModelBuilder
@@ -21,7 +20,6 @@ export class MyProfileViewModelBuilder
     const userData = await getUserData(makeClient(session.jwt));
 
     const apiData = {
-      dummy: 'dummy',
       userData: {
         id: userData.id,
         username: userData.username,

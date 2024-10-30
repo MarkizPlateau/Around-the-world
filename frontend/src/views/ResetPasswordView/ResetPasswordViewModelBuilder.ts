@@ -3,7 +3,6 @@ import { ResetPasswordViewModel } from './ResetPasswordViewModel';
 import { redirect } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
 export type ResetPasswordViewApiData = {
-  dummy: string;
   resetPasswordCode: string | undefined;
 };
 export class ResetPasswordViewModelBuilder
@@ -19,7 +18,6 @@ export class ResetPasswordViewModelBuilder
       redirect(ROUTES.HOME);
     }
     const apiData = {
-      dummy: 'dummy',
       resetPasswordCode,
     };
 

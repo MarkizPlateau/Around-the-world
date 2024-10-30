@@ -15,5 +15,5 @@ export const ROUTES = {
   ABOUT_US: '/about-us',
   CONTACT: '/contact',
   ECO: generateRoutes('eco'),
-  FESTIVAL: generateRoutes('festival'),
+  FESTIVAL: generateRoutes('events'),
 };

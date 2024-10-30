@@ -1,18 +1,14 @@
 import { IModelBuilder } from '@/model/mvvm';
 import { LoginViewModel } from './LoginViewModel';
 
-export type LoginViewApiData = {
-  dummy: string;
-};
+export type LoginViewApiData = {};
 export class LoginViewModelBuilder implements IModelBuilder<LoginViewModel, LoginViewApiData> {
-  build(apiData: LoginViewApiData): LoginViewModel {
-    return new LoginViewModel(apiData);
+  build(): LoginViewModel {
+    return new LoginViewModel();
   }
 
   async loadApiData() {
-    const apiData = {
-      dummy: 'dummy',
-    };
+    const apiData = {};
 
     return apiData;
   }
