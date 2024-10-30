@@ -1,7 +1,7 @@
 'use client';
 
 import { NextPage } from 'next';
-import { Alert, AlertIcon, AlertTitle, Box, Flex, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, AlertTitle, Box, Text } from '@chakra-ui/react';
 import { FormWrapper } from '@/wrappers';
 
 // TODO
@@ -14,8 +14,8 @@ const AccountConfirmationView: NextPage = () => {
       <Alert status="success" colorScheme="green" borderRadius="xl">
         <AlertIcon />
         <Box>
-          <AlertTitle mr="2">Gratulacje !</AlertTitle>
-          <Text>Twoje konto jest już aktywne !</Text>
+          <AlertTitle mr="2">Congratulations !</AlertTitle>
+          <Text>Your account is now active!</Text>
         </Box>
       </Alert>
     </FormWrapper>

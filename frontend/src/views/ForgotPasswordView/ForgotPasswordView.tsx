@@ -19,18 +19,19 @@ const ForgotPasswordView: NextPage<ForgotPasswordViewType> = observer(
     return (
       <FormWrapper>
         <Heading as="h1" fontSize="3xl" color="purple" textAlign="center">
-          Odzyskanie konta
+          Account recovery
         </Heading>
         <Text fontSize="medium" my="6">
-          By odzyskać konto, podaj swój e-mail na który wyślemy Ci dalsze instrukcje
+          To recover your account, please provide your email address to which we will send you
+          further instructions.
         </Text>
         <VStack gap="4">
           <CustomFormControl
             labelTitle="E-mail"
-            isInvalid={model.showErrors && !model.isEmailCorrect && !model.isUsername}
-            errorMessage="Wymagana jest nazwa użytkownika lub prawidłowy e-mail"
+            isInvalid={model.showErrors && !model.isEmailCorrect}
+            errorMessage="Username or valid email is required"
           >
-            <CustomInput {...bindProperty(model, 'email')} placeholder="Adres e-mail" />
+            <CustomInput {...bindProperty(model, 'email')} placeholder="Email address" />
           </CustomFormControl>
         </VStack>
 
@@ -45,7 +46,7 @@ const ForgotPasswordView: NextPage<ForgotPasswordViewType> = observer(
           <Alert status="success" mt="3" colorScheme="green" borderRadius="base">
             <AlertIcon />
             <Box>
-              <Text>Na Twoje konto wysłano wiadomość z dalszymi instrukcjami</Text>
+              <Text>A message with further instructions has been sent to your account.</Text>
             </Box>
           </Alert>
         )}
@@ -55,7 +56,7 @@ const ForgotPasswordView: NextPage<ForgotPasswordViewType> = observer(
           borderRadius="xl"
           color="white"
           command={model.sendResetPasswordCode}
-          text="Wyślij"
+          text="Send"
           isLoading={model.isApiDataLoading}
           my="10"
         />

@@ -1,8 +1,5 @@
 const generateRoutes = (category: string) => ({
   NEWS: `/${category}/news`,
-  LIST: `/${category}/list`,
-  MAP: `/${category}/map`,
-  DETAILS: (id: number) => `${category}/id-${id}`,
 });
 
 export const ROUTES = {
@@ -14,6 +11,8 @@ export const ROUTES = {
   PROFILE: '/my-profile',
   ABOUT_US: '/about-us',
   CONTACT: '/contact',
+  LIST: '/list',
+  NEWS: '/news',
   ECO: generateRoutes('eco'),
   FESTIVAL: generateRoutes('events'),
 };

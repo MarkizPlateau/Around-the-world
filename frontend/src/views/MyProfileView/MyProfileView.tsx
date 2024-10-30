@@ -6,7 +6,7 @@ import { FormWrapper } from '@/wrappers';
 import { MyProfileViewModel } from './MyProfileViewModel';
 import { MyProfileViewModelBuilder } from './MyProfileViewModelBuilder';
 import { withModel } from '@/utils/hooks/withModel';
-import { Alert, AlertIcon, AlertTitle, Box, Heading, VStack } from '@chakra-ui/react';
+import { Alert, AlertIcon, AlertTitle, Box, Heading, Text, VStack } from '@chakra-ui/react';
 import { CustomFormControl, CustomInput, CustomPasswordInput, FormButton } from '@/components';
 import { bindProperty } from '@/model/mvvm';
 
@@ -17,38 +17,36 @@ type MyProfileViewType = {
 const MyProfileView: NextPage<MyProfileViewType> = observer(({ model }: MyProfileViewType) => {
   return (
     <FormWrapper>
-      <Heading as="h1" color="purple" fontSize="3xl" mb="6" textAlign="center">
-        Twój profil
+      <Heading as="h1" color="purple" fontSize="3xl" mb="4" textAlign="center">
+        Your profile
       </Heading>
+      <Text mb="4">In this view you can change your data.</Text>
       <VStack gap="4" mb="6">
-        <CustomFormControl errorMessage="Podaj nazwę użytkownika" labelTitle="Nazwa użytkownika">
-          <CustomInput
-            {...bindProperty(model.userData, 'username')}
-            placeholder="Nazwa użytkownika"
-          />
+        <CustomFormControl errorMessage="Enter your username" labelTitle="Username">
+          <CustomInput {...bindProperty(model.userData, 'username')} placeholder="Username" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Nieprawidłowy adres e-mail"
+          errorMessage="Invalid email address"
           isInvalid={model.showErrors && !model.isEmailCorrect}
           labelTitle="E-mail"
         >
-          <CustomInput {...bindProperty(model, 'email')} placeholder="Adres e-mail" />
+          <CustomInput {...bindProperty(model, 'email')} placeholder="Email address" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Twoje hasło powinno być naprawdę bezpieczne! Musi zawierać minimum 6 znaków, w tym przynajmniej jedną dużą literę, jedną małą literę i jedną cyfrę."
+          errorMessage="Your password should be really secure! It must contain at least 6 characters, including at least one uppercase letter, one lowercase letter and one number."
           isInvalid={model.showErrors && !model.isPasswordCorrect}
-          labelTitle="Hasło"
+          labelTitle="Password"
         >
-          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Hasło" />
+          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Password" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Hasła nie są identyczne"
+          errorMessage="The passwords are not identical"
           isInvalid={model.showErrors && !model.isConfirmPasswordCorrect}
-          labelTitle="Powtórz hasło"
+          labelTitle="Repeat password"
         >
           <CustomPasswordInput
             {...bindProperty(model, 'passwordConfirmation')}
-            placeholder="Powtórz hasło"
+            placeholder="Repeat password"
           />
         </CustomFormControl>
       </VStack>
@@ -64,7 +62,7 @@ const MyProfileView: NextPage<MyProfileViewType> = observer(({ model }: MyProfil
         <Alert borderRadius="base" colorScheme="green" mt="3" status="success">
           <AlertIcon />
           <Box>
-            <AlertTitle mr="2">Twoje dane zostały zmienione!</AlertTitle>
+            <AlertTitle mr="2">Your details have been changed!</AlertTitle>
           </Box>
         </Alert>
       )}
@@ -75,7 +73,7 @@ const MyProfileView: NextPage<MyProfileViewType> = observer(({ model }: MyProfil
         command={model.updateUser}
         isLoading={model.isApiDataLoading}
         my="10"
-        text="Zmień dane"
+        text="Change data"
       />
     </FormWrapper>
   );

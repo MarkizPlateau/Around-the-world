@@ -19,27 +19,27 @@ const ResetPasswordView: NextPage<ResetPasswordViewType> = observer(({ model }) 
   return (
     <FormWrapper>
       <Heading as="h1" color="purple" fontSize="3xl" textAlign="center">
-        Zmień hasło
+        Change password
       </Heading>
       <Text fontSize="medium" my="6">
-        Aby odzyskać dostęp do konta utwórz nowe hasło
+        To regain access to your account, create a new password
       </Text>
       <VStack gap="4">
         <CustomFormControl
-          errorMessage="Twoje hasło powinno być naprawdę bezpieczne! Musi zawierać minimum 6 znaków, w tym przynajmniej jedną dużą literę, jedną małą literę i jedną cyfrę."
+          errorMessage="Your password should be really secure! It must contain at least 6 characters, including at least one uppercase letter, one lowercase letter and one number."
           isInvalid={model.showErrors && !model.isPasswordCorrect}
-          labelTitle="Hasło"
+          labelTitle="Password"
         >
-          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Hasło" />
+          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Password" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Hasła nie są identyczne"
+          errorMessage="The passwords are not identical"
           isInvalid={model.showErrors && !model.isConfirmPasswordCorrect}
-          labelTitle="Powtórz hasło"
+          labelTitle="Repeat password"
         >
           <CustomPasswordInput
             {...bindProperty(model, 'passwordConfirmation')}
-            placeholder="Powtórz hasło"
+            placeholder="Repeat password"
           />
         </CustomFormControl>
       </VStack>
@@ -55,7 +55,7 @@ const ResetPasswordView: NextPage<ResetPasswordViewType> = observer(({ model }) 
         <Alert borderRadius="base" colorScheme="green" mt="3" status="success">
           <AlertIcon />
           <HStack justifyContent="center" my="2">
-            <Text>Hasło do Twojego konta zostało zmienione!</Text>
+            <Text>Your account password has been changed!</Text>
             <LinkNext route={ROUTES.LOGIN}>
               <Text
                 as="span"
@@ -64,7 +64,7 @@ const ResetPasswordView: NextPage<ResetPasswordViewType> = observer(({ model }) 
                 fontWeight="600"
                 width="max-content"
               >
-                Zaloguj się
+                Log in
               </Text>
             </LinkNext>
           </HStack>
@@ -78,7 +78,7 @@ const ResetPasswordView: NextPage<ResetPasswordViewType> = observer(({ model }) 
         command={model.resetPassword}
         isLoading={model.isApiDataLoading}
         my="10"
-        text="Zmień Hasło"
+        text="Change password"
       />
     </FormWrapper>
   );

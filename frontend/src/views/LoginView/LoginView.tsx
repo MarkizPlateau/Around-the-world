@@ -25,15 +25,15 @@ type LoginViewType = {
 
 const hStackContent = [
   {
-    text: 'Nie masz konta?',
+    text: `Don't have an account?`,
     url: ROUTES.REGISTER,
-    linkText: 'Zarejestruj się',
+    linkText: 'Sign up',
     id: 1,
   },
   {
-    text: 'Zapomniałeś hasła?',
+    text: 'Forgot your password?',
     url: ROUTES.FORGOT_PASSWORD,
-    linkText: 'Odzyskaj konto',
+    linkText: 'Recover your account',
     id: 2,
   },
 ];
@@ -48,28 +48,28 @@ const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) =
   return (
     <FormWrapper>
       <Heading as="h1" fontSize="3xl" textAlign="center">
-        Zaloguj się
+        Sign in
       </Heading>
       <Text fontSize="medium" my="6">
-        Wybierając nazwę użytkownika lub adres e-mail
+        By selecting a username or email address
       </Text>
       <VStack gap="4" mb="6">
-        <CustomFormControl labelTitle="Nazwa użytkownika">
-          <CustomInput {...bindProperty(model, 'username')} placeholder="Nazwa użytkownika" />
+        <CustomFormControl labelTitle="Username">
+          <CustomInput {...bindProperty(model, 'username')} placeholder="Username" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Wymagana jest nazwa użytkownika lub prawidłowy e-mail"
+          errorMessage="Username or valid email is required"
           isInvalid={model.showErrors && !model.isEmailCorrect && !model.isUsername}
           labelTitle="E-mail"
         >
-          <CustomInput {...bindProperty(model, 'email')} placeholder="Adres e-mail" />
+          <CustomInput {...bindProperty(model, 'email')} placeholder="Email address" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Hasło musi zawierać minimum 6 znaków, w tym przynajmniej jedną dużą literę, jedną małą literę i jedną cyfrę."
+          errorMessage="The password must contain at least 6 characters, including at least one uppercase letter, one lowercase letter and one number."
           isInvalid={model.showErrors && !model.isPasswordCorrect}
-          labelTitle="Hasło"
+          labelTitle="Password"
         >
-          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Hasło" />
+          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Password" />
         </CustomFormControl>
       </VStack>
 
@@ -87,13 +87,13 @@ const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) =
         command={model.login}
         isLoading={model.isApiDataLoading}
         my="10"
-        text="Zaloguj się"
+        text="Sign in"
       />
       {hStackContent.map((item) => {
         return (
-          <HStack justifyContent="center" key={item.id} my="2">
+          <HStack justifyContent="center" key={item.id} my="2" alignItems="baseline">
             <Text>{item.text}</Text>
-            <LinkNext route={item.url}>
+            <LinkNext route={item.url} fontSize="xl">
               <Text as="span" color="pink" fontWeight="600" width="min-content">
                 {item.linkText}
               </Text>

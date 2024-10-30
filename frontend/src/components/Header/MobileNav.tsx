@@ -57,10 +57,7 @@ export const MobileNav = ({ pathname }: MobileNavType) => {
                   key={item.name}
                   py="2"
                 >
-                  <LinkNext
-                    route={typeof item.href === 'function' ? String(item.href('eco')) : item.href}
-                    onClick={onClose}
-                  >
+                  <LinkNext route={item.href} onClick={onClose}>
                     {item.name}
                   </LinkNext>
                 </MenuItem>
