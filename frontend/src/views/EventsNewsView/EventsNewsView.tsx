@@ -6,6 +6,7 @@ import { NextPage } from 'next';
 import { EventsNewsViewModel } from './EventsNewsViewModel';
 import { EventsNewsViewModelBuilder } from './EventsNewsViewModelBuilder';
 import { PageWrapper } from '@/wrappers';
+import { Heading } from '@chakra-ui/react';
 
 type EventsNewsViewType = {
   model: EventsNewsViewModel;
@@ -14,7 +15,9 @@ type EventsNewsViewType = {
 const EventsNewsView: NextPage<EventsNewsViewType> = observer((props) => {
   return (
     <PageWrapper>
-      <h1>Events OHAYO</h1>
+      <Heading as="h1" color="mainDark">
+        Festivals list
+      </Heading>
     </PageWrapper>
   );
 });

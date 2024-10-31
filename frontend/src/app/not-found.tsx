@@ -25,7 +25,7 @@ function NotFoundPage() {
       <Box my="14">
         <Image
           priority
-          alt="Obrazek kotka - strona nie została znaleziona"
+          alt="Kitten picture - page not found"
           height={400}
           src={lightMode ? '/404_light.jpg' : '/404_dark.jpg'}
           style={{
@@ -36,14 +36,14 @@ function NotFoundPage() {
         />
       </Box>
       <Button
-        aria-label="Przejdź do strony głównej"
+        aria-label="Go to the main page"
         className="font-puff"
         colorScheme="pink"
         letterSpacing="2px"
         size="lg"
         onClick={() => router.push(ROUTES.HOME)}
       >
-        Leć do głównej
+        Fly to the main page
       </Button>
     </Flex>
   );

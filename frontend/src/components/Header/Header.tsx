@@ -46,7 +46,7 @@ export const Header: FC = () => {
                   fontSize="lg"
                   key={item.name}
                   px="2"
-                  route={typeof item.href === 'function' ? String(item.href('eco')) : item.href}
+                  route={item.href}
                 >
                   {item.name}
                 </LinkNext>

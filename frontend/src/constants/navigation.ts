@@ -2,19 +2,19 @@ import { ROUTES } from './routes';
 
 type Nagivation = {
   name: string;
-  href: string | ((category: string) => string);
+  href: string;
   id: number;
 }[];
 
 export const NAVIGATION: Nagivation = [
   {
     name: 'News',
-    href: (category) => (category === 'festival' ? ROUTES.FESTIVAL.NEWS : ROUTES.ECO.NEWS),
+    href: ROUTES.NEWS,
     id: 1,
   },
   {
     name: 'List of events',
-    href: (category) => (category === 'festival' ? ROUTES.FESTIVAL.LIST : ROUTES.ECO.LIST),
+    href: ROUTES.LIST,
     id: 2,
   },
   { name: 'About us', href: ROUTES.ABOUT_US, id: 3 },

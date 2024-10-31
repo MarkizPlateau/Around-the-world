@@ -43,7 +43,7 @@ export const Dropdown = ({ username }: { username: string | undefined }) => {
               <LinkNext route={ROUTES.PROFILE}>Your profile</LinkNext>
             </MenuItem>
             <MenuItem as="button" onClick={() => signOut()}>
-              Wyloguj się
+              Sign out
             </MenuItem>
           </MenuList>
         )}

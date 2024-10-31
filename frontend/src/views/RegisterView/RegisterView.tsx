@@ -25,38 +25,38 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
   return (
     <FormWrapper>
       <Heading as="h1" color="purple" fontSize="3xl" mb="6" textAlign="center">
-        Utwórz konto
+        Create an account
       </Heading>
       <VStack gap="4" mb="6">
         <CustomFormControl
-          errorMessage="Podaj nazwę użytkownika"
+          errorMessage="Enter your username"
           isInvalid={model.showErrors && !model.isUsername}
-          labelTitle="Nazwa użytkownika"
+          labelTitle="Username"
         >
-          <CustomInput {...bindProperty(model, 'username')} placeholder="Nazwa użytkownika" />
+          <CustomInput {...bindProperty(model, 'username')} placeholder="Username" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Nieprawidłowy adres e-mail"
+          errorMessage="Invalid email address"
           isInvalid={model.showErrors && !model.isEmailCorrect}
           labelTitle="E-mail"
         >
-          <CustomInput {...bindProperty(model, 'email')} placeholder="Adres e-mail" />
+          <CustomInput {...bindProperty(model, 'email')} placeholder="Email address" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Twoje hasło powinno być naprawdę bezpieczne! Musi zawierać minimum 6 znaków, w tym przynajmniej jedną dużą literę, jedną małą literę i jedną cyfrę."
+          errorMessage="Your password should be really secure! It must contain at least 6 characters, including at least one uppercase letter, one lowercase letter and one number."
           isInvalid={model.showErrors && !model.isPasswordCorrect}
-          labelTitle="Hasło"
+          labelTitle="Password"
         >
-          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Hasło" />
+          <CustomPasswordInput {...bindProperty(model, 'password')} placeholder="Password" />
         </CustomFormControl>
         <CustomFormControl
-          errorMessage="Hasła nie są identyczne"
+          errorMessage="The passwords are not identical"
           isInvalid={model.showErrors && !model.isConfirmPasswordCorrect}
-          labelTitle="Powtórz hasło"
+          labelTitle="Repeat password"
         >
           <CustomPasswordInput
             {...bindProperty(model, 'passwordConfirmation')}
-            placeholder="Powtórz hasło"
+            placeholder="Repeat password"
           />
         </CustomFormControl>
       </VStack>
@@ -72,11 +72,11 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
         <Alert borderRadius="base" colorScheme="green" mt="3" status="success">
           <AlertIcon />
           <Box>
-            <AlertTitle mr="2">Gratulacje! Rejestracja zakończona sukcesem!</AlertTitle>
+            <AlertTitle mr="2">Congratulations! Registration completed successfully!</AlertTitle>
 
             <Text>
-              Aby aktywować swoje konto, wystarczy potwierdzić rejestrację, korzystając z
-              wiadomości, którą wysłaliśmy na Twój adres e-mail.
+              To activate your account, simply confirm your registration using the message we sent
+              to your email address.
             </Text>
           </Box>
         </Alert>
@@ -88,13 +88,13 @@ const RegisterView: NextPage<RegisterViewType> = observer(({ model }: RegisterVi
         command={model.register}
         isLoading={model.isApiDataLoading}
         my="10"
-        text="Zarejestruj się"
+        text="Sign up"
       />
-      <HStack justifyContent="center">
-        <Text>Masz już konto?</Text>
-        <LinkNext route={ROUTES.LOGIN}>
+      <HStack justifyContent="center" alignItems="baseline">
+        <Text>Already have an account?</Text>
+        <LinkNext route={ROUTES.LOGIN} fontSize="xl">
           <Text as="span" color="pink" fontWeight="600" width="min-content">
-            Zaloguj się
+            Sign in
           </Text>
         </LinkNext>
       </HStack>

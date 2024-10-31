@@ -6,6 +6,7 @@ import { NextPage } from 'next';
 import { EcoNewsViewModel } from './EcoNewsViewModel';
 import { EcoNewsViewModelBuilder } from './EcoNewsViewModelBuilder';
 import { PageWrapper } from '@/wrappers';
+import { Heading } from '@chakra-ui/react';
 
 type EcoNewsViewType = {
   model: EcoNewsViewModel;
@@ -14,7 +15,9 @@ type EcoNewsViewType = {
 const EcoNewsView: NextPage<EcoNewsViewType> = observer((props) => {
   return (
     <PageWrapper>
-      <h1>ECO OHAYO</h1>
+      <Heading as="h1" color="mainDark">
+        Eco List
+      </Heading>
     </PageWrapper>
   );
 });
