@@ -106,6 +106,10 @@ coverage
 ############################
 
 .env
+.env.docker
+.env.docker.example
+
+
 license.txt
 exports
 .strapi

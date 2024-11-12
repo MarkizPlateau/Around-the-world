@@ -91,9 +91,9 @@ const LoginView: NextPage<LoginViewType> = observer(({ model }: LoginViewType) =
       />
       {hStackContent.map((item) => {
         return (
-          <HStack justifyContent="center" key={item.id} my="2" alignItems="baseline">
+          <HStack alignItems="baseline" justifyContent="center" key={item.id} my="2">
             <Text>{item.text}</Text>
-            <LinkNext route={item.url} fontSize="xl">
+            <LinkNext fontSize="xl" route={item.url}>
               <Text as="span" color="pink" fontWeight="600" width="min-content">
                 {item.linkText}
               </Text>

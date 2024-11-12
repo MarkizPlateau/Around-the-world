@@ -12,6 +12,7 @@ export const Dropdown = ({ username }: { username: string | undefined }) => {
       as={username ? 'div' : 'button'}
       background="white"
       color="purple"
+      fontWeight="bold"
       height="40px"
       name={username ? username.slice(0, 1) : '?'}
       width="40px"

@@ -1,0 +1,46 @@
+version: '3'
+services:
+  # PostgreSQL database
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: around_the_world
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/db/db_backup.sql:/docker-entrypoint-initdb.d/db_backup.sql
+    ports:
+      - "5432:5432"
+    restart: always
+
+  # Strapi backend
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - ./backend/.env.docker  
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - "1337:1337"
+    depends_on:
+      - db
+    restart: always  
+
+  # Next.js frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    env_file:
+      - ./frontend/.env.docker 
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
+    driver: local

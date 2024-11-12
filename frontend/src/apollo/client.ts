@@ -12,8 +12,15 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = (headers?: Record<string, string>) => {
+  // Check whether the application is running in Docker
+  const uri = process.env.BACKEND_INTERNAL_URL
+    ? typeof window === 'undefined'
+      ? `${process.env.BACKEND_INTERNAL_URL}/graphql`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`
+    : `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`;
+
   return new HttpLink({
-    uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+    uri,
     fetchOptions: { cache: 'no-store' },
     headers: headers,
   });
