@@ -2,12 +2,16 @@
 
 import { useContext, useEffect, useState, createContext } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 export const useNavigationContext = () => useContext(NavigationContext);
 
 const NavigationContext = createContext<ReturnType<typeof useNavigation>>({
   previousRoute: null,
 });
+
+const { HOME, ACCOUNT_CONFIRMATION, FORGOT_PASSWORD, RESET_PASSWORD, REGISTER } = ROUTES;
+const redirectRoutes = [ACCOUNT_CONFIRMATION, FORGOT_PASSWORD, RESET_PASSWORD, REGISTER];
 
 const useNavigation = () => {
   const pathname = usePathname();
@@ -19,7 +23,11 @@ const useNavigation = () => {
   useEffect(() => {
     const url = `${pathname}?${searchParams}`;
     setPreviousRoute(currentRoute);
-    setCurrentRoute(url);
+    if (redirectRoutes.includes(pathname)) {
+      setCurrentRoute(HOME);
+    } else {
+      setCurrentRoute(url);
+    }
   }, [pathname, searchParams]);
 
   return { previousRoute };

@@ -18,3 +18,5 @@ Due to the fact that I wanted to focus more on logic in the project, I decided t
 
 **Account Confirmation View url in Strapi**
 Strapi/Settings/Advanced settings/Redirection url - http://localhost:3000/account-confirmation (Your localhost address)
+<!-- TODO Explain -->
+docker-compose down -v

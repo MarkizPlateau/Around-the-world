@@ -62,10 +62,10 @@ export class AuthorizationModel extends Model {
         });
         if (response?.error) {
           this.setServerErrors(response.error);
-          this.isApiDataLoading = false;
+          this.setIsLoading(false);
         } else {
           runInAction(() => {
-            this.isApiDataLoading = false;
+            this.setIsLoading(false);
             this.successfulLogin = true;
           });
         }
