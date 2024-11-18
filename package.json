@@ -13,8 +13,8 @@
     "start-frontend": "npm run dev --workspace frontend",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "format-lint-build": "npm run format-lint-build --workspace frontend",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "gen": "npm run gen --workspace frontend"
+    "gen": "npm run gen --workspace frontend",
+    "test": "npm run test --workspace frontend"
   },
   "author": "Marek Adamczyk",
   "license": "ISC",
