@@ -26,24 +26,37 @@ To maintain a single `package-lock.json` file and avoid potential conflicts, ins
 - Set Up Environment Variables on the backend and frontend based on the provided .env.example, env.docker.example, etc.
 - From the main project directory, install all dependencies for both workspaces
 ```
-npm install-all
+npm run install-all
 ```
 - Additionally, you will need PostgreSQL and create a database ("backend/.env.example") and then import the data.
 ```
 psql -U postgres -d around_the_world -f backend/db/db_backup.sql
 ```
-- Run the GraphQL Code Generator
+- Build backend
+```
+npm run build --workspace=backend
+```
+- Run the GraphQL Code Generator (when backend is running)
 ```
 npm run gen
 ```
-- Run the app
+- Kill the process and run the app again (and and for each subsequent run only)
 ```
 npm run start
 ```
 ## Running the Project via Docker
+- Set Up Environment Variables on the backend and frontend based on the provided .env.example, env.docker.example, etc.
 - From main folder
 ```
 docker-compose up --build
+```
+- Run the GraphQL Code Generator
+```
+npm run gen
+```
+- Kill process and restart (and and for each subsequent run only)
+```
+docker-compose up
 ```
 - For stops and removes containers, volumes
 ```
