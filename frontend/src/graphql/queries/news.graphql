@@ -1,0 +1,24 @@
+query news {
+  news {
+    meta {
+      pagination {
+        ...PaginationMeta
+      }
+    }
+    data {
+      id
+      attributes {
+        title
+        content
+        picture {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        ...DateFieldsNews
+      }
+    }
+  }
+}

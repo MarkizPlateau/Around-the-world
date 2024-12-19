@@ -11,7 +11,9 @@ export default function LayoutWrapper({ children }: PropsWithChildren) {
   const isHome = path === ROUTES.HOME;
   return (
     <Box
-      h="100vh"
+      display={isHome ? 'block' : 'flex'}
+      flexDirection="column"
+      minH="100vh"
       sx={{
         bg: 'linear-gradient(to bottom, rgb(214, 219, 220), rgb(255, 255, 255))',
         color: 'black',
@@ -21,14 +23,12 @@ export default function LayoutWrapper({ children }: PropsWithChildren) {
         },
       }}
       w="100vw"
-      display={isHome ? 'block' : 'flex'}
-      flexDirection="column"
     >
       {!isHome && <Header />}
       {isHome ? (
         <>{children}</>
       ) : (
-        <Box mx="auto" as="main" position="relative" maxWidth="80rem" width="100%" flex="1">
+        <Box as="main" flex="1" maxWidth="80rem" mx="auto" position="relative" width="100%">
           {children}
         </Box>
       )}

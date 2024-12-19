@@ -1,0 +1,18 @@
+fragment PaginationMeta on Pagination {
+  total
+  page
+  pageSize
+  pageCount
+}
+
+fragment DateFieldsNews on New {
+  createdAt
+  updatedAt
+  publishedAt
+}
+
+fragment DateFieldsComments on Comment {
+  createdAt
+  updatedAt
+  publishedAt
+}
